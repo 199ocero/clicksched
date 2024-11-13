@@ -23,7 +23,7 @@ defineProps<{
             </h2>
         </template>
 
-        <div class="my-10 gap-10 space-y-10">
+        <div>
             <UpdateProfileInformationForm
                 :must-verify-email="mustVerifyEmail"
                 :status="status"

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { Card } from '@/shadcn/ui/card';
 import { Head } from '@inertiajs/vue3';
 </script>
 
@@ -7,16 +8,16 @@ import { Head } from '@inertiajs/vue3';
     <Head title="Dashboard" />
 
     <AuthenticatedLayout>
-        <div class="py-12">
-            <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div
-                    class="overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg"
-                >
-                    <div class="p-6 text-gray-900 dark:text-gray-100">
-                        You're logged in {{ $page.props.auth.user.name }}!
-                    </div>
-                </div>
+        <Card>
+            <div class="p-5">
+                <p>
+                    Welcome back
+                    <span class="font-bold">{{
+                        $page.props.auth.user.name
+                    }}</span
+                    >!
+                </p>
             </div>
-        </div>
+        </Card>
     </AuthenticatedLayout>
 </template>

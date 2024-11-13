@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import ThemeToggle from '@/Components/ThemeToggle.vue';
 import { Button } from '@/shadcn/ui/button';
 import {
     DropdownMenu,
@@ -95,7 +96,8 @@ const currentRoute = route().current();
                 </SheetContent>
             </Sheet>
 
-            <div class="flex w-full items-center justify-end">
+            <div class="flex w-full items-center justify-end gap-2">
+                <ThemeToggle />
                 <DropdownMenu>
                     <DropdownMenuTrigger as-child>
                         <Button

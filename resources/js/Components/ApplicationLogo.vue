@@ -2,29 +2,27 @@
     <svg
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
-        class="text-zinc-950 dark:text-zinc-50"
+        class="fill-current text-zinc-950 dark:text-zinc-50"
     >
         <path
             d="M6.75 3C4.67893 3 3 4.67893 3 6.75V17.25C3 19.3211 4.67893 21 6.75 21H17.25C19.3211 21 21 19.3211 21 17.25V6.75C21 4.67893 19.3211 3 17.25 3H6.75Z"
-            fill="currentColor"
             opacity="0.2"
         />
         <path
             d="M7.5 4.5C6.67157 4.5 6 5.17157 6 6V18C6 18.8284 6.67157 19.5 7.5 19.5H16.5C17.3284 19.5 18 18.8284 18 18V6C18 5.17157 17.3284 4.5 16.5 4.5H7.5Z"
-            fill="currentColor"
         />
         <path
             d="M8 8C8 7.44772 8.44772 7 9 7H15C15.5523 7 16 7.44772 16 8C16 8.55228 15.5523 9 15 9H9C8.44772 9 8 8.55228 8 8Z"
-            fill="white"
+            class="fill-zinc-100 dark:fill-zinc-800"
         />
         <path
             d="M8 12C8 11.4477 8.44772 11 9 11H15C15.5523 11 16 11.4477 16 12C16 12.5523 15.5523 13 15 13H9C8.44772 13 8 12.5523 8 12Z"
-            fill="white"
+            class="fill-zinc-100 dark:fill-zinc-800"
         />
         <path
             d="M9 15C8.44772 15 8 15.4477 8 16C8 16.5523 8.44772 17 9 17H13C13.5523 17 14 16.5523 14 16C14 15.4477 13.5523 15 13 15H9Z"
-            fill="white"
+            class="fill-zinc-100 dark:fill-zinc-800"
         />
-        <circle cx="18" cy="6" r="2.5" fill="currentColor" stroke="white" />
+        <circle cx="18" cy="6" r="2.5" stroke="white" />
     </svg>
 </template>
