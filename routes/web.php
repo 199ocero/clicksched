@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -24,8 +23,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
-
-    Route::get('/accounts', [AccountsController::class, 'index'])->name('accounts.index');
 });
 
 // Google OAuth routes
