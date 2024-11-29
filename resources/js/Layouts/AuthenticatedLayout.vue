@@ -25,6 +25,7 @@ interface Route {
 
 const navigationRoutes: Route[] = [
     { name: 'Dashboard', href: route('dashboard'), routeName: 'dashboard' },
+    { name: 'Accounts', href: route('accounts.index'), routeName: 'accounts.index' },
 ];
 
 const currentRoute = route().current();
