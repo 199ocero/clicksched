@@ -42,7 +42,7 @@ const updatePassword = () => {
             <CardTitle>Update Password</CardTitle>
         </CardHeader>
         <CardContent>
-            <p class="mb-4 text-gray-600 dark:text-gray-400">
+            <p class="mb-4 text-zinc-600 dark:text-zinc-400">
                 Ensure your account is using a long, random password to stay
                 secure.
             </p>

@@ -11,8 +11,11 @@ import {
     DropdownMenuTrigger,
 } from '@/shadcn/ui/dropdown-menu';
 import { Sheet, SheetContent, SheetTrigger } from '@/shadcn/ui/sheet';
-import { Link } from '@inertiajs/vue3';
+import { Toaster } from '@/shadcn/ui/toast';
+import { useToast } from '@/shadcn/ui/toast/use-toast';
+import { Link, usePage } from '@inertiajs/vue3';
 import { CircleUser, LogOut, Menu, Settings } from 'lucide-vue-next';
+import { onMounted, watch } from 'vue';
 
 interface Route {
     name: string;
@@ -25,9 +28,64 @@ const navigationRoutes: Route[] = [
 ];
 
 const currentRoute = route().current();
+
+const { toast } = useToast();
+const page = usePage();
+
+const showFlashToast = () => {
+    const flash = page.props.flash as Record<string, any>;
+
+    if (flash.success && typeof flash.success === 'object') {
+        toast({
+            title: flash.success.title ?? 'Success',
+            description: flash.success.message ?? 'Successfully completed action.',
+            duration: flash.success.duration ?? 5000,
+            variant: 'default',
+        });
+    }
+
+    if (flash.error && typeof flash.error === 'object') {
+        toast({
+            title: flash.error.title ?? 'Error',
+            description: flash.error.message ?? 'An error occurred.',
+            duration: flash.error.duration ?? 5000,
+            variant: 'destructive',
+        });
+    }
+
+    if (flash.info && typeof flash.info === 'object') {
+        toast({
+            title: flash.info.title ?? 'Information',
+            description: flash.info.message ?? 'Information message.',
+            duration: flash.info.duration ?? 5000,
+            variant: 'default',
+        });
+    }
+
+    if (flash.message && typeof flash.message === 'object') {
+        toast({
+            title: flash.message.title ?? 'Message',
+            description: flash.message.message ?? 'Message.',
+            duration: flash.message.duration ?? 5000,
+            variant: 'default',
+        });
+    }
+};
+
+watch(
+    () => page.props.flash,
+    () => {
+        showFlashToast();
+    },
+);
+
+onMounted(() => {
+    showFlashToast();
+});
 </script>
 
 <template>
+    <Toaster />
     <div class="flex min-h-screen w-full flex-col">
         <header
             class="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6"
