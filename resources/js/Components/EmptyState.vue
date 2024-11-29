@@ -3,7 +3,7 @@ import { Card, CardDescription, CardHeader, CardTitle } from '@/shadcn/ui/card';
 
 defineProps({
     icon: {
-        type: Object,
+        type: [Object, Function],
         required: false,
         default: null,
     },
