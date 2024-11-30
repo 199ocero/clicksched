@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import Checkbox from '@/Components/Checkbox.vue';
-import GoogleIcon from '@/Components/GoogleIcon.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 defineProps<{
     canResetPassword?: boolean;
     status?: string;
@@ -115,7 +116,7 @@ const googleLogin = () => {
                 @click="googleLogin"
                 class="w-full"
             >
-                <GoogleIcon class="h-5 w-5" />
+                <FontAwesomeIcon :icon="faGoogle" />
                 Sign in with Google
             </PrimaryButton>
 
