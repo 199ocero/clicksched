@@ -13,8 +13,10 @@ class Account extends Model
         'user_id',
         'sociable_id',
         'sociable_type',
+        'platform',
         'name',
         'handle',
+        'email',
         'profile_image_url',
         'access_token',
         'refresh_token',
@@ -43,6 +45,8 @@ class Account extends Model
         static::creating(function ($account) {
             if (self::where('sociable_id', $account->sociable_id)
                 ->where('sociable_type', $account->sociable_type)
+                ->where('platform', $account->platform)
+                ->where('handle', $account->handle)
                 ->exists()
             ) {
                 throw new \Exception('This account already exists for the given platform.', 403);

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\Platform\BlueskyController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,10 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard');
 
     Route::get('/accounts', [AccountsController::class, 'index'])->name('accounts.index');
+
+    // Bluesky routes
+    Route::post('/bluesky/store', [BlueskyController::class, 'store'])->name('bluesky.store');
+    Route::post('/bluesky/destroy', [BlueskyController::class, 'destroy'])->name('bluesky.destroy');
 });
 
 // Google OAuth routes

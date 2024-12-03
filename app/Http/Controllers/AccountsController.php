@@ -19,6 +19,7 @@ class AccountsController extends Controller
                         'profile_image_url' => $account->profile_image_url,
                         'sociable_id' => $account->sociable_id,
                         'sociable_type' => $account->sociable_type,
+                        'platform' => $account->platform,
                     ];
                 }),
         ]);
