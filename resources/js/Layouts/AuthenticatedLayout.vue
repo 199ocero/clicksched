@@ -17,6 +17,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/shadcn/ui/dropdown-menu';
+import { Separator } from '@/shadcn/ui/separator';
 import { Sheet, SheetContent, SheetTrigger } from '@/shadcn/ui/sheet';
 import { Toaster } from '@/shadcn/ui/toast';
 import { useToast } from '@/shadcn/ui/toast/use-toast';
@@ -24,11 +25,13 @@ import { Link, usePage } from '@inertiajs/vue3';
 import {
     Bell,
     CircleUser,
-    File,
+    FilePlus2,
+    Files,
     LayoutDashboard,
+    Library,
     LogOut,
     Menu,
-    Settings,
+    UserRoundCog,
     Users,
 } from 'lucide-vue-next';
 import { onMounted, watch } from 'vue';
@@ -40,24 +43,48 @@ interface Route {
     icon: any;
 }
 
-const navigationRoutes: Route[] = [
+const dashboardRoutes: Route[] = [
     {
         name: 'Dashboard',
         href: route('dashboard'),
         routeName: 'dashboard',
         icon: LayoutDashboard,
     },
+];
+
+const mainNavigationRoutes: Route[] = [
     {
         name: 'New Post',
         href: route('new-post.index'),
         routeName: 'new-post.index',
-        icon: File,
+        icon: FilePlus2,
     },
+    {
+        name: 'Posts',
+        href: route('posts.index'),
+        routeName: 'posts.index',
+        icon: Files,
+    },
+    {
+        name: 'Media',
+        href: route('media.index'),
+        routeName: 'media.index',
+        icon: Library,
+    },
+];
+
+const accountManagementRoutes: Route[] = [
     {
         name: 'Accounts',
         href: route('accounts.index'),
         routeName: 'accounts.index',
         icon: Users,
+    },
+    {
+        name: 'Profile',
+        href: route('profile.edit'),
+        routeName: 'profile.edit',
+        icon: UserRoundCog,
     },
 ];
 
@@ -151,7 +178,43 @@ onMounted(() => {
                         class="grid items-start px-2 text-sm font-medium lg:px-4"
                     >
                         <Link
-                            v-for="navItem in navigationRoutes"
+                            v-for="navItem in dashboardRoutes"
+                            :key="navItem.name"
+                            :href="navItem.href"
+                            :class="[
+                                currentRoute === navItem.routeName
+                                    ? 'bg-muted text-foreground'
+                                    : 'text-muted-foreground',
+                                'flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-foreground',
+                            ]"
+                        >
+                            <component
+                                :is="navItem.icon"
+                                class="mr-2 h-4 w-4"
+                            />
+                            {{ navItem.name }}
+                        </Link>
+                        <Separator class="my-2" />
+                        <Link
+                            v-for="navItem in mainNavigationRoutes"
+                            :key="navItem.name"
+                            :href="navItem.href"
+                            :class="[
+                                currentRoute === navItem.routeName
+                                    ? 'bg-muted text-foreground'
+                                    : 'text-muted-foreground',
+                                'flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-foreground',
+                            ]"
+                        >
+                            <component
+                                :is="navItem.icon"
+                                class="mr-2 h-4 w-4"
+                            />
+                            {{ navItem.name }}
+                        </Link>
+                        <Separator class="my-2" />
+                        <Link
+                            v-for="navItem in accountManagementRoutes"
                             :key="navItem.name"
                             :href="navItem.href"
                             :class="[
@@ -201,9 +264,9 @@ onMounted(() => {
                         </Button>
                     </SheetTrigger>
                     <SheetContent side="left" class="flex flex-col">
-                        <nav class="grid gap-2 text-lg font-medium">
+                        <nav class="mt-2 grid gap-2 text-lg font-medium">
                             <Link
-                                v-for="navItem in navigationRoutes"
+                                v-for="navItem in dashboardRoutes"
                                 :key="navItem.name"
                                 :href="navItem.href"
                                 :class="[
@@ -215,7 +278,43 @@ onMounted(() => {
                             >
                                 <component
                                     :is="navItem.icon"
-                                    class="mr-2 h-4 w-4"
+                                    class="mr-2 h-6 w-6"
+                                />
+                                {{ navItem.name }}
+                            </Link>
+                            <Separator />
+                            <Link
+                                v-for="navItem in mainNavigationRoutes"
+                                :key="navItem.name"
+                                :href="navItem.href"
+                                :class="[
+                                    currentRoute === navItem.routeName
+                                        ? 'bg-muted text-foreground'
+                                        : 'text-muted-foreground',
+                                    'mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2',
+                                ]"
+                            >
+                                <component
+                                    :is="navItem.icon"
+                                    class="mr-2 h-6 w-6"
+                                />
+                                {{ navItem.name }}
+                            </Link>
+                            <Separator />
+                            <Link
+                                v-for="navItem in accountManagementRoutes"
+                                :key="navItem.name"
+                                :href="navItem.href"
+                                :class="[
+                                    currentRoute === navItem.routeName
+                                        ? 'bg-muted text-foreground'
+                                        : 'text-muted-foreground',
+                                    'mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2',
+                                ]"
+                            >
+                                <component
+                                    :is="navItem.icon"
+                                    class="mr-2 h-6 w-6"
                                 />
                                 {{ navItem.name }}
                             </Link>
@@ -259,8 +358,8 @@ onMounted(() => {
                                     :href="route('profile.edit')"
                                     class="flex w-full cursor-pointer items-center gap-3"
                                 >
-                                    <Settings class="h-4 w-4" />
-                                    <span>Settings</span>
+                                    <UserRoundCog class="h-4 w-4" />
+                                    <span>Profile</span>
                                 </Link>
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
