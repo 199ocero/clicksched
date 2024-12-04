@@ -3,6 +3,13 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import ThemeToggle from '@/Components/ThemeToggle.vue';
 import { Button } from '@/shadcn/ui/button';
 import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '@/shadcn/ui/card';
+import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
@@ -14,18 +21,44 @@ import { Sheet, SheetContent, SheetTrigger } from '@/shadcn/ui/sheet';
 import { Toaster } from '@/shadcn/ui/toast';
 import { useToast } from '@/shadcn/ui/toast/use-toast';
 import { Link, usePage } from '@inertiajs/vue3';
-import { CircleUser, LogOut, Menu, Settings } from 'lucide-vue-next';
+import {
+    Bell,
+    CircleUser,
+    File,
+    LayoutDashboard,
+    LogOut,
+    Menu,
+    Settings,
+    Users,
+} from 'lucide-vue-next';
 import { onMounted, watch } from 'vue';
 
 interface Route {
     name: string;
     href: string;
     routeName: string;
+    icon: any;
 }
 
 const navigationRoutes: Route[] = [
-    { name: 'Dashboard', href: route('dashboard'), routeName: 'dashboard' },
-    { name: 'Accounts', href: route('accounts.index'), routeName: 'accounts.index' },
+    {
+        name: 'Dashboard',
+        href: route('dashboard'),
+        routeName: 'dashboard',
+        icon: LayoutDashboard,
+    },
+    {
+        name: 'New Post',
+        href: route('new-post.index'),
+        routeName: 'new-post.index',
+        icon: File,
+    },
+    {
+        name: 'Accounts',
+        href: route('accounts.index'),
+        routeName: 'accounts.index',
+        icon: Users,
+    },
 ];
 
 const currentRoute = route().current();
@@ -39,7 +72,8 @@ const showFlashToast = () => {
     if (flash.success && typeof flash.success === 'object') {
         toast({
             title: flash.success.title ?? 'Success',
-            description: flash.success.message ?? 'Successfully completed action.',
+            description:
+                flash.success.message ?? 'Successfully completed action.',
             duration: flash.success.duration ?? 5000,
             variant: 'default',
         });
@@ -87,120 +121,169 @@ onMounted(() => {
 
 <template>
     <Toaster />
-    <div class="flex min-h-screen w-full flex-col">
-        <header
-            class="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6"
+    <div
+        class="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]"
+    >
+        <div
+            class="sticky top-0 hidden h-screen overflow-y-auto border-r bg-muted/40 md:block"
         >
-            <nav
-                class="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6"
-            >
-                <Link
-                    :href="route('home')"
-                    class="flex items-center gap-2 text-lg font-semibold md:text-base"
+            <div class="flex h-full max-h-screen flex-col gap-2">
+                <div
+                    class="sticky top-0 z-10 flex h-14 items-center border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6"
                 >
-                    <ApplicationLogo class="h-8 w-8" />
-                    <span>{{ $page.props.app.name }}</span>
-                </Link>
-
-                <Link
-                    v-for="navItem in navigationRoutes"
-                    :key="navItem.name"
-                    :href="navItem.href"
-                    :class="[
-                        currentRoute === navItem.routeName
-                            ? 'text-foreground'
-                            : 'text-muted-foreground',
-                        'transition-colors hover:text-foreground',
-                    ]"
-                >
-                    {{ navItem.name }}
-                </Link>
-            </nav>
-
-            <Sheet>
-                <SheetTrigger as-child>
+                    <a href="/" class="flex items-center gap-2 font-semibold">
+                        <ApplicationLogo class="h-8 w-8" />
+                        <span class="">
+                            {{ $page.props.app.name }}
+                        </span>
+                    </a>
                     <Button
                         variant="outline"
                         size="icon"
-                        class="shrink-0 md:hidden"
+                        class="ml-auto h-8 w-8"
                     >
-                        <Menu class="h-5 w-5" />
-                        <span class="sr-only">Toggle navigation menu</span>
+                        <Bell class="h-4 w-4" />
+                        <span class="sr-only">Toggle notifications</span>
                     </Button>
-                </SheetTrigger>
-                <SheetContent side="left">
-                    <nav class="grid gap-6 text-lg font-medium">
-                        <Link
-                            :href="route('home')"
-                            class="flex items-center gap-2 text-lg font-semibold"
-                        >
-                            <ApplicationLogo class="h-8 w-8" />
-                            <span>{{ $page.props.app.name }}</span>
-                        </Link>
-
+                </div>
+                <div class="flex-1 overflow-y-auto">
+                    <nav
+                        class="grid items-start px-2 text-sm font-medium lg:px-4"
+                    >
                         <Link
                             v-for="navItem in navigationRoutes"
                             :key="navItem.name"
                             :href="navItem.href"
                             :class="[
                                 currentRoute === navItem.routeName
-                                    ? 'text-foreground'
+                                    ? 'bg-muted text-foreground'
                                     : 'text-muted-foreground',
-                                'transition-colors hover:text-foreground',
+                                'flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-foreground',
                             ]"
                         >
+                            <component
+                                :is="navItem.icon"
+                                class="mr-2 h-4 w-4"
+                            />
                             {{ navItem.name }}
                         </Link>
                     </nav>
-                </SheetContent>
-            </Sheet>
-
-            <div class="flex w-full items-center justify-end gap-2">
-                <ThemeToggle />
-                <DropdownMenu>
-                    <DropdownMenuTrigger as-child>
-                        <Button
-                            variant="secondary"
-                            size="icon"
-                            class="rounded-full"
-                        >
-                            <CircleUser class="h-5 w-5" />
-                            <span class="sr-only">Toggle user menu</span>
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>
-                            <Link
-                                :href="route('profile.edit')"
-                                class="flex w-full cursor-pointer items-center gap-3"
-                            >
-                                <Settings class="h-4 w-4" />
-                                <span>Settings</span>
-                            </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>
-                            <Link
-                                :href="route('logout')"
-                                method="post"
-                                as="button"
-                                class="flex w-full cursor-pointer items-center gap-3"
-                            >
-                                <LogOut class="h-4 w-4" />
-                                <span>Logout</span>
-                            </Link>
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                </div>
+                <div class="sticky bottom-0 mt-auto p-4">
+                    <Card>
+                        <CardHeader class="p-2 pt-0 md:p-4">
+                            <CardTitle>Upgrade to Pro</CardTitle>
+                            <CardDescription>
+                                Unlock all features and get unlimited access to
+                                our support team.
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent class="p-2 pt-0 md:p-4 md:pt-0">
+                            <Button size="sm" class="w-full"> Upgrade </Button>
+                        </CardContent>
+                    </Card>
+                </div>
             </div>
-        </header>
-
-        <main
-            class="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8"
-        >
-            <slot />
-        </main>
+        </div>
+        <div class="flex flex-col">
+            <header
+                class="sticky top-0 z-10 flex h-14 items-center gap-4 border-b bg-[#F8F8FA] px-4 dark:bg-[#1E1E23] lg:h-[60px] lg:px-6"
+            >
+                <Sheet>
+                    <SheetTrigger as-child>
+                        <Button
+                            variant="outline"
+                            size="icon"
+                            class="shrink-0 md:hidden"
+                        >
+                            <Menu class="h-5 w-5" />
+                            <span class="sr-only">Toggle navigation menu</span>
+                        </Button>
+                    </SheetTrigger>
+                    <SheetContent side="left" class="flex flex-col">
+                        <nav class="grid gap-2 text-lg font-medium">
+                            <Link
+                                v-for="navItem in navigationRoutes"
+                                :key="navItem.name"
+                                :href="navItem.href"
+                                :class="[
+                                    currentRoute === navItem.routeName
+                                        ? 'bg-muted text-foreground'
+                                        : 'text-muted-foreground',
+                                    'mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2',
+                                ]"
+                            >
+                                <component
+                                    :is="navItem.icon"
+                                    class="mr-2 h-4 w-4"
+                                />
+                                {{ navItem.name }}
+                            </Link>
+                        </nav>
+                        <div class="mt-auto">
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>Upgrade to Pro</CardTitle>
+                                    <CardDescription>
+                                        Unlock all features and get unlimited
+                                        access to our support team.
+                                    </CardDescription>
+                                </CardHeader>
+                                <CardContent>
+                                    <Button size="sm" class="w-full">
+                                        Upgrade
+                                    </Button>
+                                </CardContent>
+                            </Card>
+                        </div>
+                    </SheetContent>
+                </Sheet>
+                <div class="flex w-full items-center justify-end gap-2">
+                    <ThemeToggle />
+                    <DropdownMenu>
+                        <DropdownMenuTrigger as-child>
+                            <Button
+                                variant="secondary"
+                                size="icon"
+                                class="rounded-full"
+                            >
+                                <CircleUser class="h-5 w-5" />
+                                <span class="sr-only">Toggle user menu</span>
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem>
+                                <Link
+                                    :href="route('profile.edit')"
+                                    class="flex w-full cursor-pointer items-center gap-3"
+                                >
+                                    <Settings class="h-4 w-4" />
+                                    <span>Settings</span>
+                                </Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem>
+                                <Link
+                                    :href="route('logout')"
+                                    method="post"
+                                    as="button"
+                                    class="flex w-full cursor-pointer items-center gap-3"
+                                >
+                                    <LogOut class="h-4 w-4" />
+                                    <span>Logout</span>
+                                </Link>
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                </div>
+            </header>
+            <main
+                class="flex flex-1 flex-col gap-4 overflow-y-auto p-4 lg:gap-6 lg:p-6"
+            >
+                <slot />
+            </main>
+        </div>
     </div>
 </template>
