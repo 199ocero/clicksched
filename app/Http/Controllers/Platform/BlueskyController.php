@@ -51,7 +51,6 @@ class BlueskyController extends Controller
 
             switch ($response->status()) {
                 case 200:
-                    continue;
                     break;
                 case 400:
                     $errorData = $response->json();
