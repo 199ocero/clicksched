@@ -83,7 +83,7 @@ class BlueskyController extends Controller
                     'handle' => $request->handle ?? null,
                     'email' => null,
                     'profile_image_url' => $response->json()['avatar'] ?? null,
-                    'access_token' => Crypt::encrypt($request->app_password),
+                    'access_token' => Crypt::encryptString($request->app_password),
                     'refresh_token' => null,
                     'token_expires_at' => null,
                 ]);

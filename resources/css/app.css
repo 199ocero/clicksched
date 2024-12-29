@@ -2,77 +2,155 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+::-webkit-scrollbar {
+    @apply h-2.5 w-2.5 px-2;
+}
 
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
+::-webkit-scrollbar-track {
+    @apply bg-transparent;
+}
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-
-    --ring: 240 10% 3.9%;
-
-    --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-
-    --ring: 240 4.9% 83.9%;
-  }
+::-webkit-scrollbar-thumb {
+    @apply rounded-full border-[1px] border-solid border-transparent bg-border bg-clip-padding;
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 240 10% 3.9%;
+
+        --muted: 240 4.8% 95.9%;
+        --muted-foreground: 240 3.8% 46.1%;
+
+        --popover: 0 0% 100%;
+        --popover-foreground: 240 10% 3.9%;
+
+        --card: 0 0% 100%;
+        --card-foreground: 240 10% 3.9%;
+
+        --border: 240 5.9% 90%;
+        --input: 240 5.9% 90%;
+
+        --primary: 240 5.9% 10%;
+        --primary-foreground: 0 0% 98%;
+
+        --secondary: 240 4.8% 95.9%;
+        --secondary-foreground: 240 5.9% 10%;
+
+        --accent: 240 4.8% 95.9%;
+        --accent-foreground: 240 5.9% 10%;
+
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+
+        --ring: 240 10% 3.9%;
+
+        --radius: 0.5rem;
+    }
+
+    .dark {
+        --background: 240 10% 3.9%;
+        --foreground: 0 0% 98%;
+
+        --muted: 240 3.7% 15.9%;
+        --muted-foreground: 240 5% 64.9%;
+
+        --popover: 240 10% 3.9%;
+        --popover-foreground: 0 0% 98%;
+
+        --card: 240 10% 3.9%;
+        --card-foreground: 0 0% 98%;
+
+        --border: 240 3.7% 15.9%;
+        --input: 240 3.7% 15.9%;
+
+        --primary: 0 0% 98%;
+        --primary-foreground: 240 5.9% 10%;
+
+        --secondary: 240 3.7% 15.9%;
+        --secondary-foreground: 0 0% 98%;
+
+        --accent: 240 3.7% 15.9%;
+        --accent-foreground: 0 0% 98%;
+
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 0 0% 98%;
+
+        --ring: 240 4.9% 83.9%;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+.tiptap p.is-editor-empty:first-child::before {
+    color: #adb5bd;
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+}
+
+/* ShadCN-inspired FullCalendar styles */
+.full-calendar-theme {
+    --fc-page-bg-color: #f4f4f5; /* Tailwind zinc-100 */
+    --fc-neutral-bg-color: #e4e4e7; /* Tailwind zinc-200 */
+    --fc-neutral-text-color: #52525b; /* Tailwind zinc-500 */
+    --fc-border-color: #d4d4d8; /* Tailwind zinc-300 */
+    --fc-button-text-color: #ffffff; /* White */
+    --fc-button-bg-color: #18181b; /* Tailwind zinc-900 */
+    --fc-button-border-color: #3f3f46; /* Tailwind zinc-700 */
+    --fc-button-hover-bg-color: #3f3f46; /* Tailwind zinc-700 */
+    --fc-button-hover-border-color: #27272a; /* Tailwind zinc-800 */
+    --fc-button-active-bg-color: #3f3f46; /* Tailwind zinc-700 */
+    --fc-button-active-border-color: #27272a; /* Tailwind zinc-800 */
+    --fc-event-bg-color: #3f3f46; /* Tailwind zinc-700 */
+    --fc-event-border-color: #27272a; /* Tailwind zinc-800 */
+    --fc-event-text-color: #ffffff; /* White */
+    --fc-event-selected-overlay-color: rgba(0, 0, 0, 0.2); /* Subtle overlay */
+    --fc-more-link-bg-color: #d4d4d8; /* Tailwind zinc-300 */
+    --fc-more-link-text-color: #52525b; /* Tailwind zinc-500 */
+    --fc-today-bg-color: rgba(
+        226,
+        226,
+        226,
+        0.15
+    ); /* Tailwind zinc-500 overlay */
+}
+
+/* Dark theme adjustments */
+.dark .full-calendar-theme {
+    --fc-page-bg-color: #18181b; /* Tailwind zinc-900 */
+    --fc-neutral-bg-color: #27272a; /* Tailwind zinc-800 */
+    --fc-neutral-text-color: #d4d4d8; /* Tailwind zinc-300 */
+    --fc-border-color: #3f3f46; /* Tailwind zinc-700 */
+    --fc-button-text-color: #ffffff; /* White */
+    --fc-button-bg-color: #27272a; /* Tailwind zinc-800 */
+    --fc-button-border-color: #3f3f46; /* Tailwind zinc-700 */
+    --fc-button-hover-bg-color: #3f3f46; /* Tailwind zinc-700 */
+    --fc-button-hover-border-color: #27272a; /* Tailwind zinc-800 */
+    --fc-button-active-bg-color: #18181b; /* Tailwind zinc-900 */
+    --fc-button-active-border-color: #3f3f46; /* Tailwind zinc-700 */
+    --fc-event-bg-color: #52525b; /* Tailwind zinc-600 */
+    --fc-event-border-color: #3f3f46; /* Tailwind zinc-700 */
+    --fc-event-text-color: #ffffff; /* White */
+    --fc-today-bg-color: rgba(78, 78, 87, 0.15); /* Tailwind zinc-500 overlay */
+}
+
+.fc-event:hover {
+    @apply !bg-transparent;
+}
+
+.fc-daygrid-day-frame {
+    @apply p-2;
+}
+
+[data-radix-popper-content-wrapper] {
+    @apply !z-50;
 }

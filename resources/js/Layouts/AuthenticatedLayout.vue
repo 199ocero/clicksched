@@ -148,11 +148,9 @@ onMounted(() => {
 
 <template>
     <Toaster />
-    <div
-        class="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]"
-    >
+    <div class="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
         <div
-            class="sticky top-0 hidden h-screen overflow-y-auto border-r bg-muted/40 md:block"
+            class="sticky top-0 hidden h-screen overflow-y-auto border-r bg-muted/40 lg:block"
         >
             <div class="flex h-full max-h-screen flex-col gap-2">
                 <div
@@ -257,7 +255,7 @@ onMounted(() => {
                         <Button
                             variant="outline"
                             size="icon"
-                            class="shrink-0 md:hidden"
+                            class="shrink-0 lg:hidden"
                         >
                             <Menu class="h-5 w-5" />
                             <span class="sr-only">Toggle navigation menu</span>

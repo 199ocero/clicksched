@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
 
     // New Post routes
     Route::get('/new-post', [NewPostController::class, 'index'])->name('new-post.index');
+    Route::post('/new-post', [NewPostController::class, 'store'])->name('new-post.store');
 
     // Posts routes
     Route::get('/posts', [PostsController::class, 'index'])->name('posts.index');

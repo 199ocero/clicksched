@@ -6,10 +6,10 @@ enum PlatformType: string
 {
     case BLUESKY = 'bluesky';
 
-    public function getPlatform(): string
+    public function getPlatformLabel(): string
     {
         return match ($this) {
-            self::BLUESKY => 'bluesky',
+            self::BLUESKY => 'Bluesky',
         };
     }
 }

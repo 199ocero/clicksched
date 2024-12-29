@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class AccountsController extends Controller
@@ -10,7 +11,9 @@ class AccountsController extends Controller
     public function index()
     {
         return Inertia::render('Accounts', [
-            'accounts' => Account::query()->get()
+            'accounts' => Account::query()
+                ->where('user_id', Auth::id())
+                ->get()
                 ->map(function ($account) {
                     return [
                         'id' => $account->id,
