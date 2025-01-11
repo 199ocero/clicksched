@@ -21,5 +21,9 @@ const proxyChecked = computed({
 </script>
 
 <template>
-    <Checkbox :value="value" v-model="proxyChecked" />
+    <Checkbox 
+        :checked="proxyChecked"
+        :value="value"
+        @update:checked="proxyChecked = $event"
+    />
 </template>

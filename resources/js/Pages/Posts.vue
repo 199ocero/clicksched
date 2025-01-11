@@ -112,6 +112,18 @@ const removeAccount = (accountToRemove: Account) => {
     );
 };
 
+const removePlatform = (platformToRemove: string) => {
+    selectedPlatform.value = selectedPlatform.value.filter(
+        (platform) => platform !== platformToRemove,
+    );
+};
+
+const removeStatus = (statusToRemove: string) => {
+    selectedStatus.value = selectedStatus.value.filter(
+        (status) => status !== statusToRemove,
+    );
+};
+
 watch(
     selectedPlatform,
     (newPlatforms) => {
@@ -265,12 +277,14 @@ const formattedTime = (time: string) => {
                                 :value="item"
                             >
                                 <TagsInputItemText />
-                                <TagsInputItemDelete />
+                                <TagsInputItemDelete
+                                    @click="removePlatform(item)"
+                                />
                             </TagsInputItem>
                         </div>
 
                         <ComboboxRoot
-                            v-model="selectedStatus"
+                            v-model="selectedPlatform"
                             v-model:open="platformOpen"
                             v-model:search-term="platformSearchTerm"
                             class="w-full"
@@ -455,7 +469,9 @@ const formattedTime = (time: string) => {
                                 :value="item"
                             >
                                 <TagsInputItemText />
-                                <TagsInputItemDelete />
+                                <TagsInputItemDelete
+                                    @click="removeStatus(item)"
+                                />
                             </TagsInputItem>
                         </div>
 
